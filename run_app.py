@@ -1,4 +1,4 @@
-from Heurist2Ediarum import app
+from heurist2ediarum import app
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()

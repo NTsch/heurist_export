@@ -1,11 +1,13 @@
-from cx_Freeze import setup, Executable
-
-includefiles = ['main_flask.py']
+from setuptools import setup, find_packages
 
 setup(
- name='Heurist 2 Ediarum',
- version = '0.1',
- description = 'Heurist 2 Ediarum',
- options = {'build_exe':   {'include_files':includefiles}},
- executables = [Executable('main_flask.py')]
+    name='Heurist2Ediarum',
+    version='0.1',
+    author='Niklas',
+    description='Connects Ediarum to Heurist DB automatically.',
+    packages=find_packages(),
+    install_requires=[
+        'Flask',
+        # Other dependencies
+    ],
 )

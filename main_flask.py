@@ -1,13 +1,14 @@
 from flask import Flask, request, Response
 import requests
 import xml.etree.ElementTree as ET
+import sys  # Import the sys module
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
     # Get the search query from the URL parameter '?q='
-    query = request.args.get('q', '[{"t":"10"},{"sortby":"t"}]')
+    query = request.args.get('q', default=query_argument)
 
     # REST API URL
     api_url = f"https://heurist.huma-num.fr/heurist/api/records?db=stutzmann_himanis&q={query}"
@@ -36,6 +37,10 @@ def index():
     # Return the XML content as a Flask response
     return Response(xml_content, headers=headers)
 
-
 if __name__ == '__main__':
+    if len(sys.argv) > 1:
+        query_argument = sys.argv[1]  # Get the query from the command-line argument
+    else:
+        query_argument = '[{"t":"10"},{"sortby":"t"}]'
+
     app.run()
